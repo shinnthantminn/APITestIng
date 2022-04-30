@@ -14,7 +14,7 @@ module.exports = {
   },
   get: async (req, res, next) => {
     const role = await DB.findById(req.params.id).populate('permit', '-__v')
-    permit
+    role
       ? helper.fMsg(res, 'get role by id', role)
       : next(new Error('no role with that id'))
   },
