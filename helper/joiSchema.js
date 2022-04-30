@@ -28,6 +28,12 @@ module.exports = {
           .required(),
       }),
     },
+    admin: {
+      login: joi.object({
+        email: joi.string().email().required(),
+        password: joi.string().required(),
+      }),
+    },
   },
   schemaParams: {
     id: joi.object({

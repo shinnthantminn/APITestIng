@@ -13,9 +13,11 @@ mongoose.connect(
 
 const permitRouter = require('./routers/permit')
 const roleRouter = require('./routers/role')
+const adminRouter = require('./routers/admin')
 
 app.use('/permit', permitRouter)
 app.use('/role', roleRouter)
+app.use('/admin', adminRouter)
 
 app.get('*', (req, res, next) => {
   res.status(200).json({

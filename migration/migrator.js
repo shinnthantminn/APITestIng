@@ -44,7 +44,6 @@ module.exports = {
     const raw = await fs.readFileSync('./migration/backup/backupData.json')
     const finder = JSON.parse(raw)
     if (finder.length === 0) {
-      console.log('hello')
       await fs.writeFileSync(
         './migration/backup/backupData.json',
         JSON.stringify(data),
