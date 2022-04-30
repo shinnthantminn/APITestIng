@@ -22,7 +22,7 @@ module.exports = {
       const num = []
       name.map(async (i) => {
         const obj = {}
-        obj[i] = req.body[name]
+        obj[i] = req.body[i]
         const finder = await db.findOne(obj)
         num.push(i)
         if (finder) {

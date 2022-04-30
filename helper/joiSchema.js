@@ -33,6 +33,13 @@ module.exports = {
         email: joi.string().email().required(),
         password: joi.string().required(),
       }),
+      register: joi.object({
+        name: joi.string().min(3).required(),
+        email: joi.string().email().required(),
+        password: joi.string().required(),
+        phone: joi.string().required(),
+        gender: joi.string().required(),
+      }),
     },
   },
   schemaParams: {

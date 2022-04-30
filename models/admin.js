@@ -7,8 +7,8 @@ const adminSchema = new Schema({
   password: { type: String, required: true },
   phone: { type: String, required: true, unique: true },
   gender: { type: String, required: true },
-  role: [{ type: String, ref: 'role' }],
-  permit: [{ type: String, ref: 'permit' }],
+  role: [{ type: Schema.Types.ObjectId, ref: 'role' }],
+  permit: [{ type: Schema.Types.ObjectId, ref: 'permit' }],
 })
 
 const admin = mongoose.model('admin', adminSchema)
