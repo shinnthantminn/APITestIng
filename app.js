@@ -11,6 +11,8 @@ mongoose.connect(
   `mongodb+srv://root:${453493851}@blog.74s1i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
 )
 
+// mongoose.connect(`mongodb://127.0.0.1:27017/${'Test'}`)
+
 const permitRouter = require('./routers/permit')
 const roleRouter = require('./routers/role')
 const adminRouter = require('./routers/admin')
