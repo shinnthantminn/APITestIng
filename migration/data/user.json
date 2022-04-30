@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Shinn Thant Minn",
+    "email": "shinthantmin32@gmail.com",
+    "password": "123123123",
+    "phone": "09600600600",
+    "gender": "male"
+  },
+  {
+    "name": "Htet Htet",
+    "email": "HtetHtet@gmail.com",
+    "password": "123123123",
+    "phone": "09700700700",
+    "gender": "female"
+  },
+  {
+    "name": "Shar Natha Linn",
+    "email": "sharshar@gmail.com",
+    "password": "123123123",
+    "phone": "09800800800",
+    "gender": "female"
+  }
+]

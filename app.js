@@ -31,6 +31,15 @@ app.use((err, req, res, next) => {
   })
 })
 
+const migrator = require('./migration/migrator')
+
+const dataMigrationAndBackUp = async () => {
+  await migrator.migration()
+  await migrator.backupData()
+}
+
+dataMigrationAndBackUp()
+
 app.listen(process.env.PORT || 4000, () => {
   console.log('i am running from ' + process.env.PORT)
 })
