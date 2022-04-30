@@ -1,3 +1,5 @@
+const helper = require('../helper/helper')
+
 module.exports = {
   validateBody: (schema) => {
     return async (req, res, next) => {
@@ -31,6 +33,30 @@ module.exports = {
           next()
         }
       }
+    }
+  },
+  validateToken: () => {
+    return async (req, res, next) => {
+      console.log()
+      if (req.headers.authorization) {
+        const token = req.headers.authorization.split(' ')[1]
+        const data = await helper.decode(token)
+        const item = await helper.get(data._id)
+        const admin = JSON.parse(item)
+        if (admin) {
+          req.admin = admin
+          next()
+        } else next(new Error('your are no login'))
+      } else next(new Error('tokenization error'))
+    }
+  },
+  validateRole: (...role) => {
+    return async (req, res, next) => {
+      const data = req.admin.role.map((i) => i.name)
+      const finder = await data.some((i) => role.includes(i))
+      if (finder) {
+        next()
+      } else next(new Error('you have no permission'))
     }
   },
 }

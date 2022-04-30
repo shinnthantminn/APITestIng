@@ -1,4 +1,6 @@
 const DB = require('../models/admin')
+const roleDB = require('../models/role')
+const permitDB = require('../models/permit')
 const helper = require('../helper/helper')
 
 module.exports = {
@@ -49,5 +51,55 @@ module.exports = {
       const admin = await DB.find().populate('permit role', '-__v')
       helper.fMsg(res, 'delete complete', admin)
     } else next(new Error('no admin with that id'))
+  },
+  addRole: async (req, res, next) => {
+    const admin = await DB.findById(req.body.adminId)
+    const role = await roleDB.findById(req.body.roleId)
+
+    const finder = admin.role.find((i) => i.equals(role._id))
+    if (finder) {
+      next(new Error('this role was existing in our server'))
+      return
+    }
+    if (admin && role) {
+      await DB.findByIdAndUpdate(admin._id, { $push: { role: role._id } })
+      const newAdmin = await DB.find().populate('permit role', '-__v')
+      helper.fMsg(res, 'add role complete', newAdmin)
+    } else next(new Error('something error'))
+  },
+  addPermit: async (req, res, next) => {
+    const admin = await DB.findById(req.body.adminId)
+    const permit = await permitDB.findById(req.body.permitId)
+
+    const finder = admin.permit.find((i) => i.equals(permit._id))
+    if (finder) {
+      next(new Error('this permit was existing in our server'))
+      return
+    }
+    if (admin && permit) {
+      await DB.findByIdAndUpdate(admin._id, { $push: { permit: permit._id } })
+      const newAdmin = await DB.find().populate('permit role', '-__v')
+      helper.fMsg(res, 'add permit complete', newAdmin)
+    } else next(new Error('something error'))
+  },
+  removeRole: async (req, res, next) => {
+    const admin = await DB.findById(req.body.adminId)
+    if (admin) {
+      await DB.findByIdAndUpdate(admin._id, {
+        $pull: { role: req.body.roleId },
+      })
+      const newAdmin = await DB.find().populate('permit role', '-__v')
+      helper.fMsg(res, 'remove role complete', newAdmin)
+    } else next(new Error('admin no found'))
+  },
+  removePermit: async (req, res, next) => {
+    const admin = await DB.findById(req.body.adminId)
+    if (admin) {
+      await DB.findByIdAndUpdate(admin._id, {
+        $pull: { permit: req.body.permitId },
+      })
+      const newAdmin = await DB.find().populate('permit role', '-__v')
+      helper.fMsg(res, 'reomve permit complete', newAdmin)
+    } else next(new Error('admin no found'))
   },
 }

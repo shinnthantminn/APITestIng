@@ -4,6 +4,8 @@ const {
   validateBody,
   validateParams,
   validateUnique,
+  validateToken,
+  validateRole,
 } = require('../helper/validator')
 const { schemaBody, schemaParams } = require('../helper/joiSchema')
 const DB = require('../models/admin')
@@ -30,5 +32,33 @@ router.post(
   validateUnique(DB, 'email', 'phone'),
   controller.register,
 )
+
+router.post('/add/role', [
+  validateBody(schemaBody.admin.role),
+  validateToken(),
+  validateRole('Admin'),
+  controller.addRole,
+])
+
+router.post('/add/permit', [
+  validateBody(schemaBody.admin.permit),
+  validateToken(),
+  validateRole('Admin'),
+  controller.addPermit,
+])
+
+router.delete('/remove/permit', [
+  validateBody(schemaBody.admin.permit),
+  validateToken(),
+  validateRole('Admin'),
+  controller.removePermit,
+])
+
+router.delete('/remove/role', [
+  validateBody(schemaBody.admin.role),
+  validateToken(),
+  validateRole('Admin'),
+  controller.removeRole,
+])
 
 module.exports = router

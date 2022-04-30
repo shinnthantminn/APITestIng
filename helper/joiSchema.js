@@ -47,6 +47,26 @@ module.exports = {
         phone: joi.string(),
         gender: joi.string(),
       }),
+      role: joi.object({
+        adminId: joi
+          .string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
+        roleId: joi
+          .string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
+      }),
+      permit: joi.object({
+        adminId: joi
+          .string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
+        permitId: joi
+          .string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
+      }),
     },
   },
   schemaParams: {
