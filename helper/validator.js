@@ -20,18 +20,6 @@ module.exports = {
   validateUnique: (db, ...name) => {
     return async (req, res, next) => {
       const num = []
-      // name.map(async (i) => {
-      //   const obj = {}
-      //   obj[i] = req.body[i]
-      //   const finder = await db.findOne(obj)
-      //   num.push(i)
-      //   if (finder) {
-      //     next(new Error(`this ${i} was existing in our server`))
-      //   } else if (num.length === name.length) {
-      //     next()
-      //   }
-      // })
-
       for (const i of name) {
         const obj = {}
         obj[i] = req.body[i]

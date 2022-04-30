@@ -13,6 +13,17 @@ router
   .post(validateBody(schemaBody.admin.login), controller.login)
   .get(controller.all)
 
+router
+  .route('/:id')
+  .get(validateParams(schemaParams.id, 'id'), controller.get)
+  .patch(
+    validateParams(schemaParams.id, 'id'),
+    validateBody(schemaBody.admin.patch),
+    validateUnique(DB, 'email', 'phone'),
+    controller.patch,
+  )
+  .delete(validateParams(schemaParams.id, 'id'), controller.drop)
+
 router.post(
   '/register',
   validateBody(schemaBody.admin.register),

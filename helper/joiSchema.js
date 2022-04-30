@@ -40,6 +40,13 @@ module.exports = {
         phone: joi.string().required(),
         gender: joi.string().required(),
       }),
+      patch: joi.object({
+        name: joi.string().min(3),
+        email: joi.string().email(),
+        password: joi.string(),
+        phone: joi.string(),
+        gender: joi.string(),
+      }),
     },
   },
   schemaParams: {

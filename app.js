@@ -38,8 +38,8 @@ app.use((err, req, res, next) => {
 const migrator = require('./migration/migrator')
 
 const dataMigrationAndBackUp = async () => {
-  await migrator.migration()
-  await migrator.backupData()
+  // await migrator.migration()
+  // await migrator.backupData()
 }
 
 dataMigrationAndBackUp()
